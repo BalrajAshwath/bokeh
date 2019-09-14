@@ -344,7 +344,7 @@ log = logging.getLogger(__name__)
 # Standard library imports
 import sys as _sys
 import types as _types
-from typing import List, Dict
+from typing import Dict, List
 
 # External imports
 
@@ -399,9 +399,9 @@ PaletteMap = Dict[str, PaletteCollection]
 
 class _PalettesModule(_types.ModuleType):
 
-    __all__ = [] # type: List[str]
+    __file__ = __file__ # type: str
 
-    # Properties --------------------------------------------------------------
+    __all__ = [] # type: List[str]
 
     @property
     def __palettes__(self) -> List[str]:
@@ -410,8 +410,6 @@ class _PalettesModule(_types.ModuleType):
             name = name + "_" if name[-1].isdigit() else name
             __palettes__ += [ name + str(index) for index in sorted(palettes.keys()) ]
         return __palettes__
-
-    # Public methods ----------------------------------------------------------
 
     @property
     def YlGn3(self) -> Palette:
@@ -2497,7 +2495,7 @@ class _PalettesModule(_types.ModuleType):
 #-----------------------------------------------------------------------------
 
 # need to explicitly transfer the docstring for Sphinx docs to build correctly
-_mod = _PalettesModule(str('bokeh.palettes'))
+_mod = _PalettesModule('bokeh.palettes')
 _mod.__doc__ = __doc__
 _mod.__all__ = dir(_mod)
 _sys.modules['bokeh.palettes'] = _mod
