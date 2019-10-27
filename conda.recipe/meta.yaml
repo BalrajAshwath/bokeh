@@ -58,7 +58,8 @@ test:
     - flaky
     - lxml
     - mock
-    - mypy
+    - mypy >=0.740
+    - typing_extensions >=3.7.4
     - nbconvert >=5.4
     - networkx
     - nodejs >=8.8
